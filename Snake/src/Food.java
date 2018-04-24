@@ -9,7 +9,10 @@
  * @author alu20482156n
  */
 public class Food {
+
+    private Node node;
     
-    private int row;
-    private int col;
+    public Food(Snake snake){
+        
+    }
 }

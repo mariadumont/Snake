@@ -1,3 +1,6 @@
+
+import javax.swing.JLabel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +11,14 @@
  *
  * @author alu20482156n
  */
-public class ScoreBoard {
+public class ScoreBoard extends JLabel{
     
     private int score;
+    
+    public void pause() {
+        setText("Paused");
+        
+    }
 }
+
+

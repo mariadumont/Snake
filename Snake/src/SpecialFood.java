@@ -11,4 +11,8 @@
 public class SpecialFood extends Food{
     
     private int visibleTime;
+
+    public SpecialFood(Snake snake) {
+        super(snake);
+    }
 }

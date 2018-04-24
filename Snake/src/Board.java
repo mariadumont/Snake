@@ -1,26 +1,120 @@
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author alu20482156n
  */
-public class Board extends javax.swing.JPanel {
+public class Board extends JPanel implements ActionListener {
 
-    
+    class MyKeyAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    /*   if (canMoveTo(currentShape, currentRow, currentCol - 1)) {
+                        currentCol--;
+                    }*/
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    /*  if (canMoveTo(currentShape, currentRow, currentCol + 1)) {
+                        currentCol++;
+                    }*/
+                    break;
+                case KeyEvent.VK_UP:
+                    /*   Shape rotShape = currentShape.rotateRight();
+                    if (canMoveTo(rotShape, currentRow, currentCol)) {
+                        currentShape = rotShape;
+                    }*/
+
+                    break;
+                case KeyEvent.VK_DOWN:
+                    /*    if (canMoveTo(currentShape, currentRow + 1, currentCol)) {
+                        currentRow++;
+                    }*/
+                    break;
+
+                case KeyEvent.VK_P:
+                    if (!timer.isRunning()) {
+                        //scoreBoard.resume();
+                        timer.start();
+                    } else {
+                        timer.stop();
+                        scoreBoard.pause();
+
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            repaint();
+        }
+
+    }
+
     private int deltaTime;
     private Food food;
     private SpecialFood specialFood;
     private Snake snake;
-    //timer;
+
+    private Timer timer;
+
+    private MyKeyAdapter myKeyAdepter;
+    private ScoreBoard scoreBoard;
+
+    public static final int NUM_ROWS = 30;
+    public static final int NUM_COLS = 30;
+
+    private Game game;
+
     /**
      * Creates new form Board
      */
     public Board() {
+        super();
         initComponents();
+
+        initValues();
+
+        timer = new Timer(deltaTime, this);
+        myKeyAdepter = new MyKeyAdapter();
+    }
+
+    private void initValues() {
+        setFocusable(true);
+
+        snake = new Snake();
+
+        deltaTime = 500;
+
+    }
+
+    public void initGame() {
+
+        initValues();
+        timer.start();
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        snake.drawSnake(g, squareWidth(), squareHeight());
+
     }
 
     /**
@@ -43,6 +137,19 @@ public class Board extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
+
+    private int squareWidth() {
+        return getWidth() / NUM_COLS;
+    }
+
+    private int squareHeight() {
+        return getHeight() / NUM_ROWS;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,8 +10,7 @@
  */
 public enum DirectionType {
 
-    NoShape, ZShape, SShape, LineShape, TShape,
-    SquareShape, LShape, MirroredLShape
+    Left, Right, Up, Down
 
 }
 

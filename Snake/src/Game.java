@@ -15,6 +15,11 @@ public class Game extends javax.swing.JFrame {
      */
     public Game() {
         initComponents();
+
+        setLocationRelativeTo(null); //centra el JPanel
+        //board.setScoreBoard(scoreBoard);
+
+        labelPause.setVisible(false);
     }
 
     /**
@@ -26,21 +31,59 @@ public class Game extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scoreBoard = new javax.swing.JLabel();
+        board = new Board();
+        labelPause = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        iniGame = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        scoreBoard.setText("Score: ");
+        getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
+
+        labelPause.setText("PAUSE");
+
+        javax.swing.GroupLayout boardLayout = new javax.swing.GroupLayout(board);
+        board.setLayout(boardLayout);
+        boardLayout.setHorizontalGroup(
+            boardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boardLayout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(labelPause)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        boardLayout.setVerticalGroup(
+            boardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(boardLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(labelPause)
+                .addContainerGap(145, Short.MAX_VALUE))
         );
+
+        getContentPane().add(board, java.awt.BorderLayout.CENTER);
+
+        jMenu1.setText("Game");
+
+        iniGame.setText("Ini game");
+        iniGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniGameActionPerformed(evt);
+            }
+        });
+        jMenu1.add(iniGame);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void iniGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniGameActionPerformed
+        board.initGame();
+    }//GEN-LAST:event_iniGameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +121,11 @@ public class Game extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Board board;
+    private javax.swing.JMenuItem iniGame;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel labelPause;
+    private javax.swing.JLabel scoreBoard;
     // End of variables declaration//GEN-END:variables
 }
