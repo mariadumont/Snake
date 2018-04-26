@@ -16,10 +16,12 @@ public class Food {
     private Node nodeFood;
     private Snake snake;
 
+    
     public Food(Snake snake) {
-        //if (!isTheSnake()) {
+        nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
+        while (Node.checkNodesHit(nodeFood, snake.getListNodes().get(0))) {
             nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
-        //}
+        }
     }
 
     public void drawFood(Graphics g, int squareWidth, int squareHeight) {
@@ -34,9 +36,10 @@ public class Food {
         return (int) (Math.random() * Board.NUM_ROWS + 1);
     }
 
-    private boolean isTheSnake() {
-
-        return true;
+    public Node getNodeFood() {
+        return nodeFood;
     }
+
+   
 
 }

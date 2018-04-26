@@ -70,5 +70,7 @@ public class Snake {
      public ArrayList<Node> getListNodes() {
         return listNodes;
     }
+     
+     
 
 }

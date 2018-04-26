@@ -29,6 +29,13 @@ public class Node {
     public void setCol(int col) {
         this.col = col;
     }
-    
-    
+
+    public static boolean checkNodesHit(Node a, Node b) {
+        
+        if (a.col == b.col && a.row == b.row) {
+            return true;
+        }
+        return false;
+    }
+
 }

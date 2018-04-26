@@ -85,14 +85,18 @@ public class Board extends JPanel implements ActionListener {
         timer = new Timer(deltaTime, this);
         myKeyAdepter = new MyKeyAdapter();
         snake = new Snake();
-        food = new Food(snake);
-        
+
+        food = null;
+
     }
 
     public void initGame() {
         removeKeyListener(myKeyAdepter);
         addKeyListener(myKeyAdepter);
         timer.start();
+
+        food = new Food(snake);
+
     }
 
     private int squareWidth() {
@@ -107,7 +111,10 @@ public class Board extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         snake.drawSnake(g, squareWidth(), squareHeight());
-        food.drawFood(g, squareWidth(), squareHeight());
+        if (food != null) {
+            food.drawFood(g, squareWidth(), squareHeight());
+        }
+
     }
 
     /**
@@ -134,10 +141,15 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         snake.move();
-
+        eat();
         repaint();
     }
 
+    public void eat() {
+        if (snake.getListNodes().get(0).checkNodesHit(snake.getListNodes().get(0), food.getNodeFood())) {
+            food = new Food(snake);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
