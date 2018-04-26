@@ -25,7 +25,7 @@ public class Board extends JPanel implements ActionListener {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
                     snake.setDirection(DirectionType.LEFT);
-                    
+
                     /*   if (canMoveTo(currentShape, currentRow, currentCol - 1)) {
                         currentCol--;
                     }*/
@@ -85,6 +85,8 @@ public class Board extends JPanel implements ActionListener {
         timer = new Timer(deltaTime, this);
         myKeyAdepter = new MyKeyAdapter();
         snake = new Snake();
+        food = new Food(snake);
+        
     }
 
     public void initGame() {
@@ -105,6 +107,7 @@ public class Board extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         snake.drawSnake(g, squareWidth(), squareHeight());
+        food.drawFood(g, squareWidth(), squareHeight());
     }
 
     /**
@@ -131,6 +134,7 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         snake.move();
+
         repaint();
     }
 

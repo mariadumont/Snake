@@ -14,7 +14,9 @@ import java.util.ArrayList;
  */
 public class Snake {
 
-    ArrayList<Node> listNodes;
+    private ArrayList<Node> listNodes;
+
+   
 
     private DirectionType direction;
 
@@ -63,6 +65,10 @@ public class Snake {
 
     public void setDirection(DirectionType direction) {
         this.direction = direction;
+    }
+    
+     public ArrayList<Node> getListNodes() {
+        return listNodes;
     }
 
 }
