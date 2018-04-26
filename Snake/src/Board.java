@@ -24,26 +24,22 @@ public class Board extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
+                    snake.setDirection(DirectionType.LEFT);
+                    
                     /*   if (canMoveTo(currentShape, currentRow, currentCol - 1)) {
                         currentCol--;
                     }*/
                     break;
                 case KeyEvent.VK_RIGHT:
-                    /*  if (canMoveTo(currentShape, currentRow, currentCol + 1)) {
-                        currentCol++;
-                    }*/
+                    snake.setDirection(DirectionType.RIGHT);
+
                     break;
                 case KeyEvent.VK_UP:
-                    /*   Shape rotShape = currentShape.rotateRight();
-                    if (canMoveTo(rotShape, currentRow, currentCol)) {
-                        currentShape = rotShape;
-                    }*/
+                    snake.setDirection(DirectionType.UP);
 
                     break;
                 case KeyEvent.VK_DOWN:
-                    /*    if (canMoveTo(currentShape, currentRow + 1, currentCol)) {
-                        currentRow++;
-                    }*/
+                    snake.setDirection(DirectionType.DOWN);
                     break;
 
                 case KeyEvent.VK_P:
@@ -80,41 +76,35 @@ public class Board extends JPanel implements ActionListener {
 
     private Game game;
 
-    /**
-     * Creates new form Board
-     */
     public Board() {
         super();
         initComponents();
-
-        initValues();
-
-        timer = new Timer(deltaTime, this);
-        myKeyAdepter = new MyKeyAdapter();
-    }
-
-    private void initValues() {
         setFocusable(true);
 
-        snake = new Snake();
-
         deltaTime = 500;
-
+        timer = new Timer(deltaTime, this);
+        myKeyAdepter = new MyKeyAdapter();
+        snake = new Snake();
     }
 
     public void initGame() {
-
-        initValues();
+        removeKeyListener(myKeyAdepter);
+        addKeyListener(myKeyAdepter);
         timer.start();
+    }
 
+    private int squareWidth() {
+        return getWidth() / NUM_COLS;
+    }
+
+    private int squareHeight() {
+        return getHeight() / NUM_ROWS;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         snake.drawSnake(g, squareWidth(), squareHeight());
-
     }
 
     /**
@@ -140,15 +130,8 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-
-    }
-
-    private int squareWidth() {
-        return getWidth() / NUM_COLS;
-    }
-
-    private int squareHeight() {
-        return getHeight() / NUM_ROWS;
+        snake.move();
+        repaint();
     }
 
 

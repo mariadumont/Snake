@@ -10,7 +10,7 @@
  */
 public enum DirectionType {
 
-    Left, Right, Up, Down
+    LEFT, RIGHT, UP, DOWN
 
 }
 
