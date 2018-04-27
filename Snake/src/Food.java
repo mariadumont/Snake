@@ -16,10 +16,9 @@ public class Food {
     private Node nodeFood;
     private Snake snake;
 
-    
     public Food(Snake snake) {
         nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
-        while (Node.checkNodesHit(nodeFood, snake.getListNodes().get(0))) {
+        while (Node.checkNodesHit(nodeFood, snake.getNodeHead())) {
             nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
         }
     }
@@ -29,17 +28,18 @@ public class Food {
     }
 
     public int getRandomCol() {
-        return (int) (Math.random() * Board.NUM_COLS + 1); //(Math.random()*(N - M + 1) + M) Valor entre M y N, ambos incluidos
+        return (int) (Math.random() * Board.NUM_COLS); //(Math.random()*(N - M + 1) + M) Valor entre M y N, ambos incluidos
     }
 
     public int getRandomRow() {
-        return (int) (Math.random() * Board.NUM_ROWS + 1);
+        return (int) (Math.random() * Board.NUM_ROWS);
     }
 
     public Node getNodeFood() {
         return nodeFood;
     }
 
-   
-
+    //comprobar que la comida no caiga en toda la serpiente!!!!!!!!! no solo en la cabeza
+    
 }
+

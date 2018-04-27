@@ -26,19 +26,26 @@ public class Board extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
-                    snake.setDirection(DirectionType.LEFT);
+                    if (!(snake.getDirection() == DirectionType.RIGHT)) {
+                        snake.setDirection(DirectionType.LEFT);
+                    }
 
                     break;
                 case KeyEvent.VK_RIGHT:
-                    snake.setDirection(DirectionType.RIGHT);
-
+                    if (!(snake.getDirection() == DirectionType.LEFT)) {
+                        snake.setDirection(DirectionType.RIGHT);
+                    }
                     break;
                 case KeyEvent.VK_UP:
-                    snake.setDirection(DirectionType.UP);
-
+                    if (!(snake.getDirection() == DirectionType.DOWN)) {
+                        snake.setDirection(DirectionType.UP);
+                    }
                     break;
+
                 case KeyEvent.VK_DOWN:
-                    snake.setDirection(DirectionType.DOWN);
+                    if (!(snake.getDirection() == DirectionType.UP)) {
+                        snake.setDirection(DirectionType.DOWN);
+                    }
                     break;
 
                 case KeyEvent.VK_P:
@@ -100,8 +107,8 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
 
         scoreBoard.reset();
-        
-        snake=new Snake();
+
+        snake = new Snake();
 
         food = new Food(snake);
 
@@ -174,13 +181,12 @@ public class Board extends JPanel implements ActionListener {
         removeKeyListener(myKeyAdepter);
         timer.stop();
     }
-    
-      public void drawBorder(Graphics g) {
+
+    public void drawBorder(Graphics g) {
         g.setColor(Color.black);
         g.drawRect(0, 0, NUM_COLS * squareWidth(), NUM_ROWS * squareHeight());
     }
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -65,6 +65,10 @@ public class Snake {
         this.direction = direction;
     }
 
+    public DirectionType getDirection() {
+        return direction;
+    }
+
     public ArrayList<Node> getListNodes() {
         return listNodes;
     }
@@ -74,12 +78,14 @@ public class Snake {
     }
 
     public boolean hitWall() {
-        if (getNodeHead().getCol() == Board.NUM_COLS  || getNodeHead().getCol() == -1
-                || getNodeHead().getRow()== Board.NUM_ROWS|| getNodeHead().getRow() == -1) {
+        if (getNodeHead().getCol() == Board.NUM_COLS || getNodeHead().getCol() == -1
+                || getNodeHead().getRow() == Board.NUM_ROWS || getNodeHead().getRow() == -1) {
             return true;
         }
 
         return false;
     }
+    
+    //cada vez que come crece
 
 }
