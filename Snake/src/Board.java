@@ -26,9 +26,6 @@ public class Board extends JPanel implements ActionListener {
                 case KeyEvent.VK_LEFT:
                     snake.setDirection(DirectionType.LEFT);
 
-                    /*   if (canMoveTo(currentShape, currentRow, currentCol - 1)) {
-                        currentCol--;
-                    }*/
                     break;
                 case KeyEvent.VK_RIGHT:
                     snake.setDirection(DirectionType.RIGHT);
@@ -90,10 +87,17 @@ public class Board extends JPanel implements ActionListener {
 
     }
 
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        this.scoreBoard = scoreBoard;
+    }
+
     public void initGame() {
+
         removeKeyListener(myKeyAdepter);
         addKeyListener(myKeyAdepter);
         timer.start();
+
+        scoreBoard.reset();
 
         food = new Food(snake);
 
@@ -147,6 +151,7 @@ public class Board extends JPanel implements ActionListener {
 
     public void eat() {
         if (snake.getListNodes().get(0).checkNodesHit(snake.getListNodes().get(0), food.getNodeFood())) {
+            scoreBoard.increment(1);
             food = new Food(snake);
         }
     }

@@ -17,7 +17,7 @@ public class Game extends javax.swing.JFrame {
         initComponents();
 
         setLocationRelativeTo(null); //centra el JPanel
-        //board.setScoreBoard(scoreBoard);
+        board.setScoreBoard(scoreBoard);
 
     }
 
@@ -30,7 +30,7 @@ public class Game extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scoreBoard = new javax.swing.JLabel();
+        scoreBoard = new ScoreBoard();
         board = new Board();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -38,7 +38,7 @@ public class Game extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        scoreBoard.setText("Score: ");
+        scoreBoard.setText("scoreBoard1");
         getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout boardLayout = new javax.swing.GroupLayout(board);
@@ -73,6 +73,8 @@ public class Game extends javax.swing.JFrame {
 
     private void iniGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniGameActionPerformed
         board.initGame();
+        scoreBoard.reset();
+
     }//GEN-LAST:event_iniGameActionPerformed
 
     /**
@@ -115,6 +117,6 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JMenuItem iniGame;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JLabel scoreBoard;
+    private ScoreBoard scoreBoard;
     // End of variables declaration//GEN-END:variables
 }
