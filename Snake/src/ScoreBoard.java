@@ -23,6 +23,10 @@ public class ScoreBoard extends JLabel {
 
     }
 
+    public void resume() {
+        setText("Score: " + score);
+    }
+
     public void increment(int points) {
         score += points;
 

@@ -1,10 +1,12 @@
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.Timer;
 
 /*
@@ -41,7 +43,7 @@ public class Board extends JPanel implements ActionListener {
 
                 case KeyEvent.VK_P:
                     if (!timer.isRunning()) {
-                        //scoreBoard.resume();
+                        scoreBoard.resume();
                         timer.start();
                     } else {
                         timer.stop();
@@ -78,7 +80,7 @@ public class Board extends JPanel implements ActionListener {
         initComponents();
         setFocusable(true);
 
-        deltaTime = 500;
+        deltaTime = 300;
         timer = new Timer(deltaTime, this);
         myKeyAdepter = new MyKeyAdapter();
         snake = new Snake();
@@ -98,6 +100,8 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
 
         scoreBoard.reset();
+        
+        snake=new Snake();
 
         food = new Food(snake);
 
@@ -118,6 +122,7 @@ public class Board extends JPanel implements ActionListener {
         if (food != null) {
             food.drawFood(g, squareWidth(), squareHeight());
         }
+        drawBorder(g);
 
     }
 
@@ -146,15 +151,36 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         snake.move();
         eat();
+
+        if (snake.hitWall()) {
+            gameOver();
+        }
+
         repaint();
+        Toolkit.getDefaultToolkit().sync();
     }
 
     public void eat() {
-        if (snake.getListNodes().get(0).checkNodesHit(snake.getListNodes().get(0), food.getNodeFood())) {
+        if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), food.getNodeFood())) {
             scoreBoard.increment(1);
             food = new Food(snake);
         }
     }
+
+    public void gameOver() {
+
+        scoreBoard.setText("GAME OVER");
+
+        removeKeyListener(myKeyAdepter);
+        timer.stop();
+    }
+    
+      public void drawBorder(Graphics g) {
+        g.setColor(Color.black);
+        g.drawRect(0, 0, NUM_COLS * squareWidth(), NUM_ROWS * squareHeight());
+    }
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

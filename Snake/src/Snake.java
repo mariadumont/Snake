@@ -16,8 +16,6 @@ public class Snake {
 
     private ArrayList<Node> listNodes;
 
-   
-
     private DirectionType direction;
 
     Snake() {
@@ -38,7 +36,7 @@ public class Snake {
     }
 
     public void move() {
-        Node head = listNodes.get(0);
+        Node head = getNodeHead();
         Node firstNode = null;
 
         switch (direction) {
@@ -66,11 +64,22 @@ public class Snake {
     public void setDirection(DirectionType direction) {
         this.direction = direction;
     }
-    
-     public ArrayList<Node> getListNodes() {
+
+    public ArrayList<Node> getListNodes() {
         return listNodes;
     }
-     
-     
+
+    public Node getNodeHead() {
+        return listNodes.get(0);
+    }
+
+    public boolean hitWall() {
+        if (getNodeHead().getCol() == Board.NUM_COLS  || getNodeHead().getCol() == -1
+                || getNodeHead().getRow()== Board.NUM_ROWS|| getNodeHead().getRow() == -1) {
+            return true;
+        }
+
+        return false;
+    }
 
 }

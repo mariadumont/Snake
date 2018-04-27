@@ -14,6 +14,7 @@ public class Node {
 
     public int row;
     public int col;
+
     public Color color;
 
     public Node(int row, int col, Color color) {
@@ -31,13 +32,19 @@ public class Node {
     }
 
     public static boolean checkNodesHit(Node a, Node b) {
-        
+
         if (a.col == b.col && a.row == b.row) {
             return true;
         }
         return false;
     }
-    
-   
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
 
 }
