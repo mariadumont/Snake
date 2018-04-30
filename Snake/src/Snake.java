@@ -90,4 +90,21 @@ public class Snake {
         return false;
     }
 
+    public Node walkSnake() {
+        for (Node n : listNodes) {
+            return n;
+        }
+        return null;
+    }
+
+    public boolean hitItself() {
+        for (int i = 1; i < listNodes.size(); i++) {
+            if (Node.checkNodesHit(getNodeHead(), listNodes.get(i))) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }

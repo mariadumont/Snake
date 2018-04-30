@@ -18,6 +18,7 @@ public class Game extends javax.swing.JFrame {
 
         setLocationRelativeTo(null); //centra el JPanel
         board.setScoreBoard(scoreBoard);
+        
 
     }
 

@@ -18,7 +18,7 @@ public class Food {
 
     public Food(Snake snake) {
         nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
-        while (Node.checkNodesHit(nodeFood, snake.getNodeHead())) {
+        while (Node.checkNodesHit(nodeFood, snake.walkSnake())) {
             nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
         }
     }
@@ -39,7 +39,7 @@ public class Food {
         return nodeFood;
     }
 
-    //comprobar que la comida no caiga en toda la serpiente!!!!!!!!! no solo en la cabeza
+    
     
 }
 

@@ -162,7 +162,7 @@ public class Board extends JPanel implements ActionListener {
         snake.move();
         eat();
 
-        if (snake.hitWall()) {
+        if (snake.hitWall() || snake.hitItself()) {
             gameOver();
         }
 
