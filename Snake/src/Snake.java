@@ -58,7 +58,11 @@ public class Snake {
         }
         head.color = Color.green;
         listNodes.add(0, firstNode);
-        listNodes.remove(listNodes.size() - 1);
+        if (!Board.hasEated) {
+            listNodes.remove(listNodes.size() - 1);
+        }
+        Board.hasEated = false;
+
     }
 
     public void setDirection(DirectionType direction) {
@@ -85,7 +89,5 @@ public class Snake {
 
         return false;
     }
-    
-    //cada vez que come crece
 
 }

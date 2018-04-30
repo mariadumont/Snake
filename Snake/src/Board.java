@@ -80,6 +80,8 @@ public class Board extends JPanel implements ActionListener {
     public static final int NUM_ROWS = 30;
     public static final int NUM_COLS = 30;
 
+    public static boolean hasEated;
+
     private Game game;
 
     public Board() {
@@ -93,6 +95,7 @@ public class Board extends JPanel implements ActionListener {
         snake = new Snake();
 
         food = null;
+        hasEated = false;
 
     }
 
@@ -171,6 +174,7 @@ public class Board extends JPanel implements ActionListener {
         if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), food.getNodeFood())) {
             scoreBoard.increment(1);
             food = new Food(snake);
+            hasEated = true;
         }
     }
 
