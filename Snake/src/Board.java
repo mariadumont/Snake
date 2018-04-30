@@ -132,6 +132,7 @@ public class Board extends JPanel implements ActionListener {
         if (food != null) {
             food.drawFood(g, squareWidth(), squareHeight());
         }
+
         drawBorder(g);
 
     }
@@ -159,11 +160,13 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        snake.move();
-        eat();
 
         if (snake.hitWall() || snake.hitItself()) {
             gameOver();
+
+        } else {
+            snake.move();
+            eat();
         }
 
         repaint();
