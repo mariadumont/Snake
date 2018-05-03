@@ -13,35 +13,45 @@ import javax.swing.JLabel;
 public class ScoreBoard extends JLabel {
 
     private int score;
+    private int level;
 
     public ScoreBoard() {
         score = 0;
+        level = 1;
     }
 
     public void pause() {
-        setText("Paused");
+        setText("Level: " + level + " · Score: " + score + " PAUSED");
 
     }
 
     public void resume() {
-        setText("Score: " + score);
+        setText("Level: " + level + " · Score: " + score);
     }
 
     public void increment(int points) {
         score += points;
 
-        setText("Score: " + score);
+        setText("Level: " + level + " · Score: " + score);
 
     }
 
     public void reset() {
         score = 0;
-        setText("Score: " + score);
+        level = 1;
+        setText("Level: " + level + " · Score: " + score);
     }
 
     public int getScore() {
         return score;
     }
-    
-    
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
 }

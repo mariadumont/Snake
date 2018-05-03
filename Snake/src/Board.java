@@ -187,6 +187,8 @@ public class Board extends JPanel implements ActionListener {
 
             }
 
+            incrementLevel();
+
             snake.setCountGrowSnake(1);
         }
     }
@@ -197,12 +199,25 @@ public class Board extends JPanel implements ActionListener {
                 scoreBoard.increment(3);
 
                 snake.setCountGrowSnake(3);
-
                 specialFood = null;
+
+                incrementLevel();
             }
-
         }
+    }
 
+    public boolean incrementLevel() {
+        if (scoreBoard.getScore() % 2 == 0) {
+            if (!(deltaTime < 100)) {
+                deltaTime -= 150;
+                scoreBoard.setLevel(scoreBoard.getLevel() + 1);
+                return true;
+            } else {
+                scoreBoard.setLevel(scoreBoard.getLevel() + 1);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void gameOver() {
