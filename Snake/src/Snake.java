@@ -18,6 +18,8 @@ public class Snake {
 
     private DirectionType direction;
 
+    private int countGrowSnake;
+
     Snake() {
         listNodes = new ArrayList<Node>(3);
 
@@ -25,6 +27,8 @@ public class Snake {
         listNodes.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 1, Color.green));
         listNodes.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 2, Color.green));
         direction = DirectionType.RIGHT;
+
+        countGrowSnake = 0;
 
     }
 
@@ -58,10 +62,12 @@ public class Snake {
         }
         head.color = Color.green;
         listNodes.add(0, firstNode);
-        if (!Board.hasEated) {
+
+        if (countGrowSnake == 0) {
             listNodes.remove(listNodes.size() - 1);
+        } else {
+            countGrowSnake--;
         }
-        Board.hasEated = false;
 
     }
 
@@ -129,6 +135,10 @@ public class Snake {
                 break;
         }
         return nextNode;
+    }
+
+    public void setCountGrowSnake(int countGrowSnake) {
+        this.countGrowSnake = countGrowSnake;
     }
 
 }

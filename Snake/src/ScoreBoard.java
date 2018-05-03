@@ -38,4 +38,10 @@ public class ScoreBoard extends JLabel {
         score = 0;
         setText("Score: " + score);
     }
+
+    public int getScore() {
+        return score;
+    }
+    
+    
 }

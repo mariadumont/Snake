@@ -80,8 +80,6 @@ public class Board extends JPanel implements ActionListener {
     public static final int NUM_ROWS = 30;
     public static final int NUM_COLS = 30;
 
-    public static boolean hasEated;
-
     private Game game;
 
     public Board() {
@@ -95,8 +93,7 @@ public class Board extends JPanel implements ActionListener {
         snake = new Snake();
 
         food = null;
-        hasEated = false;
-
+        specialFood = null;
     }
 
     public void setScoreBoard(ScoreBoard scoreBoard) {
@@ -131,6 +128,9 @@ public class Board extends JPanel implements ActionListener {
         snake.drawSnake(g, squareWidth(), squareHeight());
         if (food != null) {
             food.drawFood(g, squareWidth(), squareHeight());
+        }
+        if (specialFood != null) {
+            specialFood.drawFood(g, squareWidth(), squareHeight());
         }
 
         drawBorder(g);
@@ -167,6 +167,8 @@ public class Board extends JPanel implements ActionListener {
         } else {
             snake.move();
             eat();
+            eatSpecialFood();
+
         }
 
         repaint();
@@ -175,10 +177,32 @@ public class Board extends JPanel implements ActionListener {
 
     public void eat() {
         if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), food.getNodeFood())) {
+
             scoreBoard.increment(1);
+
             food = new Food(snake);
-            hasEated = true;
+
+            if (scoreBoard.getScore() % 2 == 0) {
+                specialFood = new SpecialFood(snake, this);
+
+            }
+
+            snake.setCountGrowSnake(1);
         }
+    }
+
+    public void eatSpecialFood() {
+        if (specialFood != null) {
+            if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), specialFood.getNodeFood())) {
+                scoreBoard.increment(3);
+
+                snake.setCountGrowSnake(3);
+
+                specialFood = null;
+            }
+
+        }
+
     }
 
     public void gameOver() {
@@ -192,6 +216,10 @@ public class Board extends JPanel implements ActionListener {
     public void drawBorder(Graphics g) {
         g.setColor(Color.black);
         g.drawRect(0, 0, NUM_COLS * squareWidth(), NUM_ROWS * squareHeight());
+    }
+
+    public void removeSpecialFood() {
+        specialFood = null;
     }
 
 

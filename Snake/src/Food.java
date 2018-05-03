@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class Food {
 
-    private Node nodeFood;
+    public Node nodeFood;
     private Snake snake;
 
     public Food(Snake snake) {
