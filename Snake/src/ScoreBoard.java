@@ -54,4 +54,8 @@ public class ScoreBoard extends JLabel {
         this.level = level;
     }
 
+    public void specialFoodTime() {
+        
+        setText("Level: " + level + " · Score: " + score + " · Time: " + SpecialFood.timerCountDown);
+    }
 }

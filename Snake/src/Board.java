@@ -195,19 +195,23 @@ public class Board extends JPanel implements ActionListener {
 
     public void eatSpecialFood() {
         if (specialFood != null) {
+            // scoreBoard.setText("Level: " + scoreBoard.getLevel() + " · Score: " + scoreBoard.getScore() + " · " + specialFood.getVisibleTime());
+            
+            scoreBoard.specialFoodTime();
+            
             if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), specialFood.getNodeFood())) {
                 scoreBoard.increment(3);
 
                 snake.setCountGrowSnake(3);
-                specialFood = null;
 
+                specialFood = null;
                 incrementLevel();
             }
         }
     }
 
     public boolean incrementLevel() {
-        if (scoreBoard.getScore() % 2 == 0) {
+        if (scoreBoard.getScore() % 5 == 0) {
             if (!(deltaTime < 100)) {
                 deltaTime -= 150;
                 scoreBoard.setLevel(scoreBoard.getLevel() + 1);

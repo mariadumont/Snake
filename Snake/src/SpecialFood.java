@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
 import javax.swing.Timer;
 
 /*
@@ -20,21 +21,41 @@ public class SpecialFood extends Food implements ActionListener {
     private Timer timer;
     private Board board;
 
+    public static Timer timerCountDown;
+    private ScoreBoard scoreBoard;
+    private int delay;
+
+    ActionListener actionToPreform;
+
     public SpecialFood(Snake snake, Board board) {
         super(snake);
+        
+        
         visibleTime = getRandomTime();
         timer = new Timer(visibleTime, this);
         this.board = board;
         nodeFood.color = Color.PINK;
         timer.start();
+ 
+        delay = 1000;
+       
+        this.actionToPreform = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) { 
+                    
+                    if (visibleTime > 0) {
+                        visibleTime--;
+                    }
+            }
+        };
+        
+        timerCountDown = new Timer(delay, actionToPreform);
 
     }
 
     public int getRandomTime() {
         return (int) (Math.random() * 21 + 10) * 1000;
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -42,8 +63,12 @@ public class SpecialFood extends Food implements ActionListener {
         timer.stop();
     }
 
-    
-    
-    
+    public int getVisibleTime() {
+        return visibleTime;
+    }
+
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        this.scoreBoard = scoreBoard;
+    }
 
 }
