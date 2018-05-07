@@ -105,6 +105,7 @@ public class Board extends JPanel implements ActionListener {
         removeKeyListener(myKeyAdepter);
         addKeyListener(myKeyAdepter);
         deltaTime = 300;
+        timer.setDelay(deltaTime);
 
         timer.start();
 
