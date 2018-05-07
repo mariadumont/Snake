@@ -75,6 +75,7 @@ public class Game extends javax.swing.JFrame {
     private void iniGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniGameActionPerformed
         board.initGame();
         scoreBoard.reset();
+        
 
     }//GEN-LAST:event_iniGameActionPerformed
 

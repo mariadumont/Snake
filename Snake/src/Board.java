@@ -77,8 +77,8 @@ public class Board extends JPanel implements ActionListener {
     private MyKeyAdapter myKeyAdepter;
     private ScoreBoard scoreBoard;
 
-    public static final int NUM_ROWS = 30;
-    public static final int NUM_COLS = 30;
+    public static final int NUM_ROWS = 20;
+    public static final int NUM_COLS = 20;
 
     private Game game;
 
@@ -104,6 +104,8 @@ public class Board extends JPanel implements ActionListener {
 
         removeKeyListener(myKeyAdepter);
         addKeyListener(myKeyAdepter);
+        deltaTime = 300;
+
         timer.start();
 
         scoreBoard.reset();
@@ -179,6 +181,7 @@ public class Board extends JPanel implements ActionListener {
         if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), food.getNodeFood())) {
 
             scoreBoard.increment(1);
+            incrementLevel();
 
             food = new Food(snake);
 
@@ -187,37 +190,36 @@ public class Board extends JPanel implements ActionListener {
 
             }
 
-            incrementLevel();
-
             snake.setCountGrowSnake(1);
         }
     }
 
     public void eatSpecialFood() {
         if (specialFood != null) {
-            // scoreBoard.setText("Level: " + scoreBoard.getLevel() + " · Score: " + scoreBoard.getScore() + " · " + specialFood.getVisibleTime());
-            
-            scoreBoard.specialFoodTime();
-            
-            if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), specialFood.getNodeFood())) {
-                scoreBoard.increment(3);
 
-                snake.setCountGrowSnake(3);
+            //scoreBoard.specialFoodTime();
+            if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), specialFood.getNodeFood())) {
+                scoreBoard.increment(specialFood.getRandomScore());
+                incrementLevel();
+                
+                snake.setCountGrowSnake(specialFood.getRandomScore());
 
                 specialFood = null;
-                incrementLevel();
+
             }
         }
     }
 
     public boolean incrementLevel() {
-        if (scoreBoard.getScore() % 5 == 0) {
-            if (!(deltaTime < 100)) {
-                deltaTime -= 150;
+        if (scoreBoard.getScore() % 5 == 0 && scoreBoard.getScore() > 1) {
+            if (deltaTime >= 50) {
+                deltaTime -= 50;
                 scoreBoard.setLevel(scoreBoard.getLevel() + 1);
+                timer.setDelay(deltaTime);
                 return true;
             } else {
                 scoreBoard.setLevel(scoreBoard.getLevel() + 1);
+                timer.setDelay(deltaTime);
                 return true;
             }
         }
@@ -241,6 +243,9 @@ public class Board extends JPanel implements ActionListener {
         specialFood = null;
     }
 
+    /* public Timer displayTimeLeft() {
+        return specialFood.timerCountDown;
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

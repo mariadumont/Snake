@@ -17,10 +17,20 @@ public class Food {
     private Snake snake;
 
     public Food(Snake snake) {
-        nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
-        while (Node.checkNodesHit(nodeFood, snake.walkSnake())) {
+        boolean hit = true;
+
+        while (hit) {
             nodeFood = new Node(getRandomRow(), getRandomCol(), Color.yellow);
+            hit = false;
+
+            for (Node node : snake.getListNodes()) {
+                if (Node.checkNodesHit(nodeFood, node)) {
+                    hit = true;
+                    break;
+                }
+            }
         }
+
     }
 
     public void drawFood(Graphics g, int squareWidth, int squareHeight) {
@@ -39,7 +49,4 @@ public class Food {
         return nodeFood;
     }
 
-    
-    
 }
-

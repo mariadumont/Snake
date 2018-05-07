@@ -21,36 +21,34 @@ public class SpecialFood extends Food implements ActionListener {
     private Timer timer;
     private Board board;
 
-    public static Timer timerCountDown;
+    //  public static Timer timerCountDown;
     private ScoreBoard scoreBoard;
     private int delay;
 
-    ActionListener actionToPreform;
-
+    //  ActionListener actionToPreform;
     public SpecialFood(Snake snake, Board board) {
         super(snake);
-        
-        
+
         visibleTime = getRandomTime();
         timer = new Timer(visibleTime, this);
         this.board = board;
         nodeFood.color = Color.PINK;
         timer.start();
- 
-        delay = 1000;
-       
+
+        /* delay = 1000;
+
         this.actionToPreform = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) { 
-                    
-                    if (visibleTime > 0) {
-                        visibleTime--;
-                    }
+            public void actionPerformed(ActionEvent evt) {
+
+                if (visibleTime > 0) {
+                    visibleTime--;
+                    board.displayTimeLeft();
+                }
             }
         };
-        
-        timerCountDown = new Timer(delay, actionToPreform);
 
+        timerCountDown = new Timer(delay, actionToPreform);*/
     }
 
     public int getRandomTime() {
@@ -61,6 +59,7 @@ public class SpecialFood extends Food implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         board.removeSpecialFood();
         timer.stop();
+
     }
 
     public int getVisibleTime() {
@@ -69,6 +68,10 @@ public class SpecialFood extends Food implements ActionListener {
 
     public void setScoreBoard(ScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
+    }
+
+    public int getRandomScore() {
+        return (int) (Math.random() * 5 + 3);
     }
 
 }
