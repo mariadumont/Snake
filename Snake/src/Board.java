@@ -80,7 +80,12 @@ public class Board extends JPanel implements ActionListener {
     public static final int NUM_ROWS = 20;
     public static final int NUM_COLS = 20;
 
-    private Game game;
+    
+    private JFrame parentFrame;
+
+    public void setParentFrame(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
+    }
 
     public Board() {
         super();
@@ -186,7 +191,7 @@ public class Board extends JPanel implements ActionListener {
 
             food = new Food(snake);
 
-            if (scoreBoard.getScore() % 2 == 0) {
+            if (scoreBoard.getScore() % 3 == 0) {
                 specialFood = new SpecialFood(snake, this);
 
             }
@@ -212,7 +217,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public boolean incrementLevel() {
-        if (scoreBoard.getScore() % 5 == 0 && scoreBoard.getScore() > 1) {
+        if (scoreBoard.getScore() % 5 == 0) {
             if (deltaTime >= 50) {
                 deltaTime -= 50;
                 scoreBoard.setLevel(scoreBoard.getLevel() + 1);
@@ -233,6 +238,9 @@ public class Board extends JPanel implements ActionListener {
 
         removeKeyListener(myKeyAdepter);
         timer.stop();
+        
+        RecordsDialog d = new RecordsDialog(parentFrame, true, scoreBoard.getScore());
+        d.setVisible(true);
     }
 
     public void drawBorder(Graphics g) {

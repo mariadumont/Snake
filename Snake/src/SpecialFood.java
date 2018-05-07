@@ -71,7 +71,7 @@ public class SpecialFood extends Food implements ActionListener {
     }
 
     public int getRandomScore() {
-        return (int) (Math.random() * 5 + 3);
+        return (int) (Math.random() * 3 + 3); //entre 3 y 5
     }
 
 }
