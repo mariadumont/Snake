@@ -111,6 +111,7 @@ public class Board extends JPanel implements ActionListener {
         deltaTime = 300;
         timer.setDelay(deltaTime);
 
+        timer.stop();
         timer.start();
 
         scoreBoard.reset();
@@ -167,6 +168,22 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        
+        if (isGameOver()) {
+            gameOver();
+        } else {
+            snake.move();
+            eat();
+            eatSpecialFood();
+
+        }
+
+        repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+
+    /*@Override
+    public void actionPerformed(ActionEvent ae) {
 
         if (snake.hitWall() || snake.hitItself()) {
             gameOver();
@@ -180,8 +197,7 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
         Toolkit.getDefaultToolkit().sync();
-    }
-
+    }*/
     public void eat() {
         if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), food.getNodeFood())) {
 
@@ -230,6 +246,17 @@ public class Board extends JPanel implements ActionListener {
         return false;
     }
 
+    public boolean isGameOver() {
+        if (Game.noWalls && snake.hitItself()) {
+            return true;
+        }
+        if (Game.noWalls == false && (snake.hitWall() || snake.hitItself())) {
+            gameOver();
+            return true;
+        }
+        return false;
+    }
+
     public void gameOver() {
 
         scoreBoard.setText("GAME OVER");
@@ -242,7 +269,11 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public void drawBorder(Graphics g) {
-        g.setColor(Color.black);
+        if (Game.noWalls) {
+            g.setColor(Color.black);
+        } else {
+            g.setColor(Color.red);
+        }
         g.drawRect(0, 0, NUM_COLS * squareWidth(), NUM_ROWS * squareHeight());
     }
 

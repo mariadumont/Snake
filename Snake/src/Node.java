@@ -47,4 +47,20 @@ public class Node {
         return col;
     }
 
+    public int getFirstCol() {
+        return col = 0;
+    }
+
+    public int getLastCol() {
+        return col = Board.NUM_COLS;
+    }
+
+    public int getFirstRow() {
+        return row = 0;
+    }
+
+    public int getLastRow() {
+        return row = Board.NUM_ROWS;
+    }
+
 }

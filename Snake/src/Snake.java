@@ -45,6 +45,56 @@ public class Snake {
 
         switch (direction) {
             case RIGHT:
+                if (Game.noWalls && head.getCol() == Board.NUM_COLS) {
+                    firstNode = new Node(head.row, head.getFirstCol(), head.color);
+
+                } else {
+                    firstNode = new Node(head.row, head.col + 1, head.color);
+                }
+                break;
+
+            case LEFT:
+                if (Game.noWalls && head.getCol() == 0) {
+                    firstNode = new Node(head.row, head.getLastCol(), head.color);
+                } else {
+                    firstNode = new Node(head.row, head.col - 1, head.color);
+                }
+                break;
+
+            case UP:
+                if (Game.noWalls && head.getRow() == 0) {
+                    firstNode = new Node(head.getLastRow(), head.col, head.color);
+                } else {
+                    firstNode = new Node(head.row - 1, head.col, head.color);
+                }
+                break;
+
+            case DOWN:
+                if (Game.noWalls && head.getRow() == Board.NUM_ROWS) {
+                    firstNode = new Node(head.getFirstRow(), head.col, head.color);
+                } else {
+                    firstNode = new Node(head.row + 1, head.col, head.color);
+                }
+                break;
+        }
+        head.color = Color.green;
+        listNodes.add(0, firstNode);
+
+        if (countGrowSnake == 0) {
+            listNodes.remove(listNodes.size() - 1);
+        } else {
+            countGrowSnake--;
+        }
+
+    }
+
+    // move classic
+    /*public void move() {
+        Node head = getNodeHead();
+        Node firstNode = null;
+
+        switch (direction) {
+            case RIGHT:
                 firstNode = new Node(head.row, head.col + 1, head.color);
                 break;
 
@@ -69,8 +119,7 @@ public class Snake {
             countGrowSnake--;
         }
 
-    }
-
+    }*/
     public void setDirection(DirectionType direction) {
         this.direction = direction;
     }
@@ -119,6 +168,47 @@ public class Snake {
 
         switch (direction) {
             case RIGHT:
+                if (Game.noWalls && head.getCol() == Board.NUM_COLS) {
+                    nextNode = new Node(head.row, head.getFirstCol(), Color.red);
+                } else {
+                    nextNode = new Node(head.row, head.col + 1, Color.red);
+                }
+                break;
+
+            case LEFT:
+                if (Game.noWalls && head.getCol() == 0) {
+                    nextNode = new Node(head.row, head.getLastCol(), Color.red);
+                } else {
+                    nextNode = new Node(head.row, head.col - 1, Color.red);
+                }
+                break;
+
+            case UP:
+                if (Game.noWalls && head.getRow() == 0) {
+                    nextNode = new Node(head.getLastRow(), head.col, Color.red);
+                } else {
+                    nextNode = new Node(head.row - 1, head.col, Color.red);
+                }
+                break;
+
+            case DOWN:
+                if (Game.noWalls && head.getRow() == Board.NUM_ROWS) {
+                    nextNode = new Node(head.getFirstRow(), head.col, Color.red);
+                } else {
+                    nextNode = new Node(head.row + 1, head.col, Color.red);
+                }
+                break;
+        }
+        return nextNode;
+    }
+
+    // getNextNode classic
+    /*public Node getNextNode() {
+        Node head = getNodeHead();
+        Node nextNode = null;
+
+        switch (direction) {
+            case RIGHT:
                 nextNode = new Node(head.row, head.col + 1, Color.red);
                 break;
 
@@ -136,7 +226,7 @@ public class Snake {
         }
         return nextNode;
     }
-
+     */
     public void setCountGrowSnake(int countGrowSnake) {
         this.countGrowSnake = countGrowSnake;
     }

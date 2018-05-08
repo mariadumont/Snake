@@ -13,11 +13,15 @@ public class Game extends javax.swing.JFrame {
     /**
      * Creates new form Game
      */
+    public static boolean noWalls;
+
     public Game() {
         initComponents();
 
         setLocationRelativeTo(null); //centra el JPanel
         board.setScoreBoard(scoreBoard);
+
+        noWalls = false;
 
     }
 
@@ -35,6 +39,7 @@ public class Game extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         iniGame = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,13 +62,21 @@ public class Game extends javax.swing.JFrame {
 
         jMenu1.setText("Game");
 
-        iniGame.setText("Ini game");
+        iniGame.setText("Classic snake");
         iniGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniGameActionPerformed(evt);
             }
         });
         jMenu1.add(iniGame);
+
+        jMenuItem2.setText("No walls snake");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuItem1.setText("Show records");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +105,12 @@ public class Game extends javax.swing.JFrame {
         d.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        board.initGame();
+        scoreBoard.reset();
+        noWalls = true;
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +153,7 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private ScoreBoard scoreBoard;
     // End of variables declaration//GEN-END:variables
 }
