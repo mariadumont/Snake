@@ -39,7 +39,7 @@ public class Game extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        scoreBoard.setText("scoreBoard1");
+        scoreBoard.setText("Level: 1 · Score: 0");
         getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout boardLayout = new javax.swing.GroupLayout(board);

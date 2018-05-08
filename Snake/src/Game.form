@@ -55,7 +55,7 @@
   <SubComponents>
     <Component class="ScoreBoard" name="scoreBoard">
       <Properties>
-        <Property name="text" type="java.lang.String" value="scoreBoard1"/>
+        <Property name="text" type="java.lang.String" value="Level: 1 &#xb7; Score: 0"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
