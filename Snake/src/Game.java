@@ -18,7 +18,6 @@ public class Game extends javax.swing.JFrame {
 
         setLocationRelativeTo(null); //centra el JPanel
         board.setScoreBoard(scoreBoard);
-        
 
     }
 
@@ -84,12 +83,14 @@ public class Game extends javax.swing.JFrame {
     private void iniGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniGameActionPerformed
         board.initGame();
         scoreBoard.reset();
-        
+
 
     }//GEN-LAST:event_iniGameActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        RecordsDialog d = new RecordsDialog(this, true, scoreBoard.getScore());
+        d.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

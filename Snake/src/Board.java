@@ -80,7 +80,6 @@ public class Board extends JPanel implements ActionListener {
     public static final int NUM_ROWS = 20;
     public static final int NUM_COLS = 20;
 
-    
     private JFrame parentFrame;
 
     public void setParentFrame(JFrame parentFrame) {
@@ -202,12 +201,11 @@ public class Board extends JPanel implements ActionListener {
 
     public void eatSpecialFood() {
         if (specialFood != null) {
-
+            incrementLevel();
             //scoreBoard.specialFoodTime();
             if (snake.getNodeHead().checkNodesHit(snake.getNodeHead(), specialFood.getNodeFood())) {
                 scoreBoard.increment(specialFood.getRandomScore());
-                incrementLevel();
-                
+
                 snake.setCountGrowSnake(specialFood.getRandomScore());
 
                 specialFood = null;
@@ -238,7 +236,7 @@ public class Board extends JPanel implements ActionListener {
 
         removeKeyListener(myKeyAdepter);
         timer.stop();
-        
+
         RecordsDialog d = new RecordsDialog(parentFrame, true, scoreBoard.getScore());
         d.setVisible(true);
     }

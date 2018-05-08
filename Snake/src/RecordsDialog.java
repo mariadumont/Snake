@@ -181,7 +181,7 @@ public class RecordsDialog extends javax.swing.JDialog {
 
         jLabelName.setText("Name:");
 
-        jTextFieldName.setText("jTextField1");
+        jTextFieldName.setText("Write your name");
 
         jLabelCurrentScore.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabelCurrentScore.setText("jLabel1");
